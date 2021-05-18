@@ -1,4 +1,9 @@
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import NavigationToolbar2Tk
+from matplotlib.backend_bases import key_press_handler
+from matplotlib.figure import Figure
 from tkinter import *
+
 
 
 
@@ -12,6 +17,7 @@ LINE_COLOR = '#000'
 # update charts
 
 # analys options
+
 
 def generateCanvas(root, width, height):
     canvas = Canvas(root, width=width, height=height)
