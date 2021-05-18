@@ -9,30 +9,39 @@ BACKCOLOR = '#fff'
 TITLE     = 'please input your content params'
 
 
-def LoadNavigator(window, size):
-    instance = Frame(window, bg=BACKCOLOR)
-    label = Label(instance, text=TITLE, bg=BACKCOLOR)
-    
+def last(arr):
+    return arr[len(arr) - 1]
+
+
+def loadInputWidgets(root, widgets):
+    values = []
     frames = []
-    inputGroups = [RegisterCelcius, RegisterWidgets, RegisterWidgets, RegisterWidgets]
-    
-    for index in range(len(inputGroups)):
-        container = None
+
+    for index in range(len(widgets)):
+        frame = None
 
         if index % 2 == 0:
-            container = Frame(instance, bg=BACKCOLOR)
-            frames.append(container)
+            frame = Frame(root, bg=BACKCOLOR)
+            frames.append(frame)
         else:
-            container = frames[len(frames) - 1] # get current frame to mount widget
+            frame = last(frames)
 
-        widget = inputGroups[index]
-        value = widget(container)
-        # celcius = RegisterCelcius(groupFrame)
+        widget = widgets[index]
+        value = widget(frame)
+        values.append(value)
+    return frames, values
 
 
-    instance.pack(side=TOP)
+def LoadNavigator(root, size):
+    form = Frame(root, bg=BACKCOLOR)
+    label = Label(form, text=TITLE, bg=BACKCOLOR)
+    
+    inputGroups = [RegisterCelcius, RegisterWidgets, RegisterWidgets, RegisterWidgets]
+    frames, values = loadInputWidgets(form, inputGroups)
+
+    form.pack(side=TOP)
     label.pack()
     for frame in frames:
         frame.pack()
 
-    return instance
+    return form
