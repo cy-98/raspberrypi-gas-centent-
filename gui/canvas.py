@@ -30,7 +30,8 @@ def renderCharts(canvas, charts):
     xdata = store['xdata']
     ydata = store['ydata']
 
-    charts.bar(xdata, ydata)
+    charts.clear()
+    charts.step(xdata, ydata)
     canvas.draw()
     return
 
@@ -42,5 +43,5 @@ def LoadCanvas(root, size):
     canvas, charts = generateCanvas(root, width, height)
     renderCharts(canvas, charts)
     canvas.get_tk_widget().pack()
-    return canvas, charts
+    return canvas, charts, renderCharts
 

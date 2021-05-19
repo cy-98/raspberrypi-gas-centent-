@@ -1,6 +1,6 @@
 store = {
-    'xdata': [],
-    'ydata': []
+    'xdata': [1, 2],
+    'ydata': [1, 2],
 }
 
 

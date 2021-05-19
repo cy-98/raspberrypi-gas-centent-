@@ -37,7 +37,7 @@ def LoadNavigator(root, size):
     label = Label(form, text=TITLE, bg=BACKCOLOR)
     
     inputGroups = [RegisterCelcius, RegisterWidgets, RegisterWidgets, RegisterWidgets]
-    frames, values = loadInputWidgets(form, inputGroups)
+    frames, values = loadInputWidgets(form, inputGroups) # TODO: values
 
     form.pack(side=TOP)
     label.pack()
