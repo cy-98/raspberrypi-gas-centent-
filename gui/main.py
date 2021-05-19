@@ -15,13 +15,15 @@ canvas, charts, renderCharts = LoadCanvas(window, size)
 
 def updateCharts( exitHandler ):
     while True:
+        #TODO:
         pass
     
 def up( exitHandler ):
     while True:
+        #TODO:
         pass
     
-useThread(updateCharts)
-useThread(up)
+# useThread(updateCharts)
+# useThread(up)
 
 window.mainloop()

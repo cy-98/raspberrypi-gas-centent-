@@ -21,7 +21,8 @@ def exitThread( id ):
 
 def useThread( fn ):
     global id
-   
+    
+    
     threads.append(True)
     exitHandler = exitThread(id)
     start_new_thread(threadDecorator, (fn, id, exitHandler))

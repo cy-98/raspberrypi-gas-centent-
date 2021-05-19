@@ -4,7 +4,7 @@ from tkinter import *
 
 
 def validate( v ):
-    def mustbeFloat():
+    def mustFloat():
         try:
             # validate
             v.get()
@@ -12,17 +12,17 @@ def validate( v ):
             # msg box
             print('input error')
 
-    return mustbeFloat
+    return mustFloat
 
 
-def RegisterCelcius( root ):
+def Registercelsius( root ):
     _value = DoubleVar()
-    
+
     widgets = Frame(root)
-    label   = Label(widgets, text="celcius")
+    label   = Label(widgets, text="celsius")
     scanf   = Entry(widgets, textvariable=_value)
     commit  = Button(widgets, text="ensure", command=validate(_value))
-    
+
     label.pack(side=LEFT)
     scanf.pack(side=LEFT)
     commit.pack(side=LEFT)
