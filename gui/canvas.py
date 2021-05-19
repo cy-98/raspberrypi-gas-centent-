@@ -18,10 +18,10 @@ LINE_COLOR = '#000'
 def generateCanvas( root, width, height ):
     dpi = 60
     figure = Figure(figsize=(width/dpi, height/dpi), dpi=dpi) # blank panel
-    
+
     charts = figure.add_subplot(1, 1, 1)
     canvas = FigureCanvasTkAgg(figure, root)
- 
+
     return canvas, charts
 
 
@@ -31,7 +31,7 @@ def renderCharts( canvas, charts ):
     ydata = store['ydata']
 
     charts.clear()
-    charts.step(xdata, ydata)
+    charts.bar(xdata, ydata)
     canvas.draw()
     return
 

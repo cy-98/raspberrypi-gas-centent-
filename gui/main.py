@@ -14,15 +14,14 @@ navigator = LoadNavigator(window, size)
 canvas, charts, renderCharts = LoadCanvas(window, size)
 
 def updateCharts( exitHandler ):
-    while True:
-        #TODO:
-        pass
-    
+    # TODO:
+    return None
+
+
 def up( exitHandler ):
-    while True:
-        #TODO:
-        pass
-    
+    #TODO:
+    return None
+
 # useThread(updateCharts)
 # useThread(up)
 

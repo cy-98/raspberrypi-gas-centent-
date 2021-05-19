@@ -1,6 +1,10 @@
+from random import randint
+
+
+
 store = {
-    'xdata': [1, 2],
-    'ydata': [1, 2],
+    'xdata': [i for i in range(100)],
+    'ydata': [i - randint(0, i) for i in range(100)],
 }
 
 
@@ -10,5 +14,5 @@ def setStore( key, value ) -> store:
 
 
 def useStore() -> setStore:
-    
+
     return store, setStore

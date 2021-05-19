@@ -15,7 +15,7 @@ def validate( v ):
     return mustFloat
 
 
-def Registercelsius( root ):
+def RegisterCelsius( root ):
     _value = DoubleVar()
 
     widgets = Frame(root)
