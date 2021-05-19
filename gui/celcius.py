@@ -3,7 +3,7 @@ from tkinter import *
 
 
 
-def validate(v):
+def validate( v ):
     def mustbeFloat():
         try:
             # validate
@@ -15,7 +15,7 @@ def validate(v):
     return mustbeFloat
 
 
-def RegisterCelcius(root):
+def RegisterCelcius( root ):
     _value = DoubleVar()
     
     widgets = Frame(root)

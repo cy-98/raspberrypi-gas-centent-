@@ -2,7 +2,7 @@ from tkinter import *
 
 
 
-def validate(v):
+def validate( v ):
     def mustbeInt():
         try:
             # validate
@@ -13,7 +13,7 @@ def validate(v):
     return mustbeInt
 
 
-def RegisterWidgets(root):
+def RegisterWidgets( root ):
     _value = IntVar()
     
     widgets = Frame(root)

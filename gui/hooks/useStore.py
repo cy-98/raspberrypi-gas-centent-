@@ -4,7 +4,7 @@ store = {
 }
 
 
-def setStore(key, value) -> store:
+def setStore( key, value ) -> store:
     store[key] = value
     return store
 

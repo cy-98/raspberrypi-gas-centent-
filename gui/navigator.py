@@ -13,7 +13,7 @@ def last(arr):
     return arr[len(arr) - 1]
 
 
-def loadInputWidgets(root, widgets):
+def loadInputWidgets( root, widgets ):
     values = []
     frames = []
 
@@ -32,7 +32,7 @@ def loadInputWidgets(root, widgets):
     return frames, values
 
 
-def LoadNavigator(root, size):
+def LoadNavigator( root, size ):
     form = Frame(root, bg=BACKCOLOR)
     label = Label(form, text=TITLE, bg=BACKCOLOR)
     

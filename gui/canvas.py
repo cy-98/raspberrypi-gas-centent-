@@ -15,7 +15,7 @@ LINE_COLOR = '#000'
 # TODO: fix scope problem
 
 
-def generateCanvas(root, width, height):
+def generateCanvas( root, width, height ):
     dpi = 60
     figure = Figure(figsize=(width/dpi, height/dpi), dpi=dpi) # blank panel
     
@@ -25,7 +25,7 @@ def generateCanvas(root, width, height):
     return canvas, charts
 
 
-def renderCharts(canvas, charts):
+def renderCharts( canvas, charts ):
     store, _ = useStore()
     xdata = store['xdata']
     ydata = store['ydata']
@@ -36,12 +36,12 @@ def renderCharts(canvas, charts):
     return
 
 
-def LoadCanvas(root, size):
+def LoadCanvas( root, size ):
     width = size['width'] * 3 / 4
     height = size['height'] / 2
 
-    canvas, charts = generateCanvas(root, width, height)
-    renderCharts(canvas, charts)
+    canvas, charts = generateCanvas( root, width, height )
+    renderCharts( canvas, charts )
     canvas.get_tk_widget().pack()
     return canvas, charts, renderCharts
 
