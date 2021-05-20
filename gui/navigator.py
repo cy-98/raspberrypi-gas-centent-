@@ -1,6 +1,6 @@
 from tkinter import *
-from celsius import RegisterCelsius
-from param import RegisterWidgets
+from param import *
+
 
 
 
@@ -36,7 +36,7 @@ def LoadNavigator( root, size ):
     form = Frame(root, bg=BACKCOLOR)
     label = Label(form, text=TITLE, bg=BACKCOLOR)
 
-    inputGroups = [RegisterCelsius, RegisterWidgets, RegisterWidgets, RegisterWidgets]
+    inputGroups = [RegisterCelsius, RegisterVolume, RegisterDensity, RegisterGravity, RegisterArea]
     frames, values = loadInputWidgets(form, inputGroups) # TODO: values
 
     form.pack(side=TOP)
