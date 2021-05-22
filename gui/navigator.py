@@ -6,7 +6,7 @@ from param import *
 
 
 BACKCOLOR = '#fff'
-TITLE     = 'please input your content params'
+TITLE     = '请输入计算参数'
 
 
 def last(arr):
@@ -14,7 +14,6 @@ def last(arr):
 
 
 def loadInputWidgets( root, widgets ):
-    values = []
     frames = []
 
     for index in range(len(widgets)):
@@ -27,9 +26,9 @@ def loadInputWidgets( root, widgets ):
             frame = last(frames)
 
         widget = widgets[index]
-        value = widget(frame)
-        values.append(value)
-    return frames, values
+        widget(frame)
+
+    return frames
 
 
 def LoadNavigator( root, size ):
@@ -37,8 +36,7 @@ def LoadNavigator( root, size ):
     label = Label(form, text=TITLE, bg=BACKCOLOR)
 
     inputGroups = [RegisterCelsius, RegisterVolume, RegisterDensity, RegisterGravity, RegisterArea]
-    frames, values = loadInputWidgets(form, inputGroups) # TODO: values
-
+    frames = loadInputWidgets(form, inputGroups)
     form.pack(side=TOP)
     label.pack()
     for frame in frames:

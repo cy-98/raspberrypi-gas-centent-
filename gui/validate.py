@@ -20,6 +20,7 @@ def validate( v, type ):
         except TclError:
             # msg box
             ErrorDuringInput(VAR_INT_TYPE)
+        return True
 
 
     if type is VAR_INT_TYPE:
@@ -33,6 +34,7 @@ def validate( v, type ):
         except TclError:
             # msg box
             ErrorDuringInput(VAR_DOUBLE_TYPE)
+        return True
 
 
     if type is VAR_DOUBLE_TYPE:
@@ -43,6 +45,8 @@ def validate( v, type ):
             v.get()
         except TclError:
             ErrorDuringInput(VAR_STR_TYPE)
+        return True
+
 
 
     if type is VAR_STR_TYPE:
