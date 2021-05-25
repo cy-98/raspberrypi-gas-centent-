@@ -10,12 +10,12 @@ from fetch import FETCH_P, FETCH_V, startFetch, stop, save
 from _thread import start_new_thread
 
 
-
-
 COMPUTE_LABEL_P = '根据压力计算'
 COMPUTE_LABEL_V = '根据流速计算'
 STOP_LABEL = '停止'
 SAVE_LABEL = '保存'
+DO_COMPUTE_LABEL = '计算'
+UPLOAD_LABEL = '上传'
 
 
 window, size = Window()
@@ -28,6 +28,8 @@ addCommand(sidebar, COMPUTE_LABEL_P, startFetch(FETCH_P))
 addCommand(sidebar, COMPUTE_LABEL_V, startFetch(FETCH_V))
 addCommand(sidebar, STOP_LABEL, stop)
 addCommand(sidebar, SAVE_LABEL, save)
+addCommand(sidebar, DO_COMPUTE_LABEL, None)
+addCommand(sidebar, UPLOAD_LABEL, None)
 
 
 window.mainloop()
