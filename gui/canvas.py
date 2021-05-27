@@ -1,7 +1,7 @@
 from tkinter import *
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from hooks.useRender import useRender
+from gui.hooks.useRender import useRender
 
 # TODO: save charts
 
@@ -9,10 +9,12 @@ from hooks.useRender import useRender
 
 # TODO: update charts
 
-LINE_COLOR = '#000'
-
 
 def generateCanvas(root, width, height):
+    # use tkinter generate canvas
+    # canvas: tkinter widgets
+    # charts: api to update/render/clear
+
     dpi = 60
     figure = Figure(figsize=(width/dpi, height/dpi), dpi=dpi)  # blank panel
 

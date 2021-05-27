@@ -22,6 +22,13 @@ def exitThread(id):
 
 
 def useThread(fn):
+    # example:
+    #   exitHandler = useThread(fn)
+    #   do something...
+    #   exit()
+
+    # not use while True in fn
+    # just pass once step function body
     global id
 
     threads.append(True)

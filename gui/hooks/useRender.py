@@ -1,14 +1,15 @@
-from hooks.useStore import useStore
+from gui.hooks.useStore import useStore
+from util import last
+
 
 canvas = None
 charts = None
 
 
-def last(arr):
-    return arr[len(arr) - 1]
-
-
 def useRender(initcanvas=canvas, initcharts=charts):
+    # useRender can update charts's UI
+    # every module can use at some moments
+    # it runs on another thread
     global canvas
     global charts
 

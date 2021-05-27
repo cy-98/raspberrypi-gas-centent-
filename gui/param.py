@@ -1,22 +1,29 @@
 from tkinter import *
-from validate import *
-from command import addCommand
-from hooks.useStore import useStore
+
+from matplotlib import artist
+from gui.validate import *
+from gui.command import addCommand
+from gui.hooks.useStore import useStore
+from gui.const import (
+    CELSIUS_LABEL,
+    DENSITY_LABEL,
+    VOLUME_LABEL,
+    ATMOSPHERIC_LABEL,
+    GRAVITY_LABEL,
+    AREA_LABEL,
+    OPERATOR_LABEL
+)
 
 
-
-COMMAND_LABEL = '确定'
-CELSIUS_LABEL = '摄氏度'
-DENSITY_LABEL = '密度'
-VOLUME_LABEL = '体积'
-GRAVITY_LABEL = '重力加速度'
-AREA_LABEL = '管道横截面积'
-OPERATOR_LABEL = '操作人员'
-DATE_LABEL = '日期'
+ENSURE_LABEL = '确定'
+store, _ = useStore()
 
 
 def setParam(key, value, dataType):
+    # validate the param is useful
+    # store it's key and value in global
     rule = validate(value, dataType)
+
     def _set():
         store, setStore = useStore()
         if rule() is True:
@@ -24,10 +31,14 @@ def setParam(key, value, dataType):
     return _set
 
 
-def addWidgets( root, label, value):
+def addWidgets(root, label, value):
+    # load UI: label input
+    # label: string  -> parma name
+    # value: value  -> param value ref
+
     widgets = Frame(root, bg='#fff')
-    label   = Label(widgets, text=label, bg='#fff')
-    scanf   = Entry(widgets, textvariable=value)
+    label = Label(widgets, text=label, bg='#fff')
+    scanf = Entry(widgets, textvariable=value)
 
     label.pack(side=LEFT)
     scanf.pack(side=LEFT)
@@ -35,45 +46,58 @@ def addWidgets( root, label, value):
     return widgets
 
 
-
-def RegisterCelsius( root ):
-    _value = DoubleVar()
+def RegisterCelsius(root):
+    _value = DoubleVar(value=store[CELSIUS_LABEL])
     widgets = addWidgets(root, CELSIUS_LABEL, _value)
-    addCommand(widgets, text=COMMAND_LABEL, event=setParam(CELSIUS_LABEL, _value, VAR_DOUBLE_TYPE))
+    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
+        CELSIUS_LABEL, _value, VAR_DOUBLE_TYPE))
     return _value
 
 
-def RegisterDensity( root ):
-    _value = DoubleVar()
+def RegisterDensity(root):
+    _value = DoubleVar(value=store[DENSITY_LABEL])
     widgets = addWidgets(root, DENSITY_LABEL, _value)
-    addCommand(widgets, text=COMMAND_LABEL, event=setParam(DENSITY_LABEL, _value, VAR_STR_TYPE))
+    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
+        DENSITY_LABEL, _value, VAR_STR_TYPE))
 
     return _value
 
 
-def RegisterVolume( root ):
+def RegisterVolume(root):
     _value = DoubleVar()
     widgets = addWidgets(root, VOLUME_LABEL, _value)
-    addCommand(widgets, text="确定", event=setParam(VOLUME_LABEL, _value, VAR_DOUBLE_TYPE))
+    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
+        VOLUME_LABEL, _value, VAR_DOUBLE_TYPE))
     return _value
 
 
-def RegisterGravity( root ):
-    _value = DoubleVar()
+def RegisterGravity(root):
+    _value = DoubleVar(value=store[GRAVITY_LABEL])
     widgets = addWidgets(root, GRAVITY_LABEL, _value)
-    addCommand(widgets, text="确定", event=setParam(GRAVITY_LABEL, _value, VAR_DOUBLE_TYPE))
+    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
+        GRAVITY_LABEL, _value, VAR_DOUBLE_TYPE))
     return _value
 
 
-def RegisterArea( root ):
-    _value = DoubleVar()
+def RegisterArea(root):
+    _value = DoubleVar(value=store[AREA_LABEL])
     widgets = addWidgets(root, AREA_LABEL, _value)
-    addCommand(widgets, text="确定", event=setParam(AREA_LABEL, _value, VAR_DOUBLE_TYPE))
+    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
+        AREA_LABEL, _value, VAR_DOUBLE_TYPE))
     return _value
 
 
-def RegisterOperator( root ):
+def RegisterOperator(root):
     _value = DoubleVar()
     widgets = addWidgets(root, OPERATOR_LABEL, _value)
-    addCommand(widgets, text="确定", event=setParam(OPERATOR_LABEL, _value, VAR_STR_TYPE))
+    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
+        OPERATOR_LABEL, _value, VAR_STR_TYPE))
+    return _value
+
+
+def RegisterAtmospheric(root):
+    _value = DoubleVar(value=store[ATMOSPHERIC_LABEL])
+    widgts = addWidgets(root, ATMOSPHERIC_LABEL, _value)
+    addCommand(widgts, text=ENSURE_LABEL, event=setParam(
+        ATMOSPHERIC_LABEL, _value, DoubleVar))
     return _value

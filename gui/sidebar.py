@@ -1,5 +1,5 @@
 from tkinter import *
-import command
+import gui.command
 
 
 def LoadSidebar(window):

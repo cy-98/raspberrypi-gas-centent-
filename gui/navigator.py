@@ -1,19 +1,13 @@
 from tkinter import *
-from param import *
-
-
-
+from gui.param import *
+from util import last
 
 
 BACKCOLOR = '#fff'
-TITLE     = '请输入计算参数'
+TITLE = '请输入计算参数'
 
 
-def last(arr):
-    return arr[len(arr) - 1]
-
-
-def loadInputWidgets( root, widgets ):
+def loadInputWidgets(root, widgets):
     frames = []
 
     for index in range(len(widgets)):
@@ -31,11 +25,12 @@ def loadInputWidgets( root, widgets ):
     return frames
 
 
-def LoadNavigator( root, size ):
+def LoadNavigator(root, size):
     form = Frame(root, bg=BACKCOLOR)
     label = Label(form, text=TITLE, bg=BACKCOLOR)
 
-    inputGroups = [RegisterCelsius, RegisterVolume, RegisterDensity, RegisterGravity, RegisterArea]
+    inputGroups = [RegisterCelsius, RegisterVolume,
+                   RegisterDensity, RegisterGravity, RegisterArea, RegisterAtmospheric]
     frames = loadInputWidgets(form, inputGroups)
     form.pack(side=TOP)
     label.pack()

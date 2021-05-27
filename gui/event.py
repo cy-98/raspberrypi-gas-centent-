@@ -1,13 +1,14 @@
+from random import setstate
+from err import ErrorNetwork
+from gui.calculate import calculate
 import json
 import requests as r
-from hooks.useThread import useThread
-from hooks.useStore import useStore
-from hooks.useRender import useRender
+from gui.hooks.useThread import useThread
+from gui.hooks.useStore import useStore
+from gui.hooks.useRender import useRender
 from time import sleep
-
-# region
-FETCH_P = 0
-FETCH_V = 1
+from util import last
+from gui.const import *
 
 
 baseUrl = 'http://localhost:3000'
@@ -15,29 +16,23 @@ pressureRoute = '/pressure'
 ratioRoute = '/ratio'
 clearRoute = '/clear'
 
-# endregion
+
+save = None
 
 # region
-stop = None
-save = None
 
 
 def bindFetch(route):
     def handler():
-        res = r.get(baseUrl + route)
-        if res:
-            return json.loads(res.content.decode(encoding='utf8'))
-        else:
-            return None
+        try:
+            res = r.get(baseUrl + route)
+            if res:
+                return json.loads(res.content.decode(encoding='utf8'))
+            else:
+                return None
+        except:
+            ErrorNetwork(baseUrl)
     return handler
-# endregion
-
-# region
-
-
-def last(arr, index=1):
-    return arr[len(arr) - index]
-
 # endregion
 
 
@@ -47,15 +42,13 @@ def startFetch(type):
 
     f = None
     store, setStore = useStore()
-    setStore('type', type)
     if type is FETCH_P:
         f = bindFetch(pressureRoute)
     if type is FETCH_V:
         f = bindFetch(ratioRoute)
 
-    # start new thread to fetch data
-
     def start():
+        setStore('type', type)
         while(True):
             content = f()
             xdata = content['xdata']
@@ -66,10 +59,13 @@ def startFetch(type):
 
             if len(xdata) % 2:
                 useRender()
-            # if k < 0.001:   # 计算斜率
-            #     break
+            # TODO：
             if len(xdata) > 500:
                 break
         useRender()
+
+        # 计算数据
+        result = calculate()
+        setStore(MEASURE_RESULT, result)
 
     return start
