@@ -1,14 +1,13 @@
-from random import setstate
+from random import expovariate, setstate
+from tkinter.constants import FALSE, TRUE
+from types import resolve_bases
 from err import ErrorNetwork
 from gui.calculate import calculate
-import json
-import requests as r
-from gui.hooks.useThread import useThread
 from gui.hooks.useStore import useStore
 from gui.hooks.useRender import useRender
-from time import sleep
-from util import last
 from gui.const import *
+import requests as r
+import json
 
 
 baseUrl = 'http://localhost:3000'
@@ -18,6 +17,10 @@ clearRoute = '/clear'
 
 
 save = None
+
+
+store, setStore = useStore()
+
 
 # region
 
@@ -35,19 +38,22 @@ def bindFetch(route):
     return handler
 # endregion
 
+# region
 
-def startFetch(type):
+
+def startFetch(type, callback):
     global stop
     global save
 
     f = None
-    store, setStore = useStore()
+
     if type is FETCH_P:
         f = bindFetch(pressureRoute)
     if type is FETCH_V:
         f = bindFetch(ratioRoute)
 
     def start():
+        callback(CALCULATING)
         setStore('type', type)
         while(True):
             content = f()
@@ -67,5 +73,23 @@ def startFetch(type):
         # 计算数据
         result = calculate()
         setStore(MEASURE_RESULT, result)
-
+        callback(str(result))
     return start
+# endregion
+
+
+def save():
+    setStore('xdata', [])
+    setStore('ydata', [])
+
+    file = open('data', 'a+', encoding='utf-8')
+
+    writeString = json.dumps(store, ensure_ascii=False,
+                             indent=4, separators=(',', ':'))
+    file.write(writeString + ',')
+
+
+def clearUI():
+    setStore('xdata', [])
+    setStore('ydata', [])
+    useRender()
