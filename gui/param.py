@@ -49,16 +49,20 @@ def addWidgets(root, label, value):
 def RegisterCelsius(root):
     _value = DoubleVar(value=store[CELSIUS_LABEL])
     widgets = addWidgets(root, CELSIUS_LABEL, _value)
-    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
-        CELSIUS_LABEL, _value, VAR_DOUBLE_TYPE))
+
+    event = setParam(CELSIUS_LABEL, _value, VAR_DOUBLE_TYPE)
+
+    addCommand(widgets, text=ENSURE_LABEL, event=event)
     return _value
 
 
 def RegisterDensity(root):
     _value = DoubleVar(value=store[DENSITY_LABEL])
     widgets = addWidgets(root, DENSITY_LABEL, _value)
-    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
-        DENSITY_LABEL, _value, VAR_STR_TYPE))
+
+    event = setParam(DENSITY_LABEL, _value, VAR_STR_TYPE)
+
+    addCommand(widgets, text=ENSURE_LABEL, event=event)
 
     return _value
 
@@ -66,38 +70,48 @@ def RegisterDensity(root):
 def RegisterVolume(root):
     _value = DoubleVar()
     widgets = addWidgets(root, VOLUME_LABEL, _value)
-    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
-        VOLUME_LABEL, _value, VAR_DOUBLE_TYPE))
+
+    event = setParam(VOLUME_LABEL, _value, VAR_DOUBLE_TYPE)
+
+    addCommand(widgets, text=ENSURE_LABEL, event=event)
     return _value
 
 
 def RegisterGravity(root):
     _value = DoubleVar(value=store[GRAVITY_LABEL])
     widgets = addWidgets(root, GRAVITY_LABEL, _value)
-    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
-        GRAVITY_LABEL, _value, VAR_DOUBLE_TYPE))
+
+    event = setParam(GRAVITY_LABEL, _value, VAR_DOUBLE_TYPE)
+
+    addCommand(widgets, text=ENSURE_LABEL, event=event)
     return _value
 
 
 def RegisterArea(root):
     _value = DoubleVar(value=store[AREA_LABEL])
     widgets = addWidgets(root, AREA_LABEL, _value)
-    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
-        AREA_LABEL, _value, VAR_DOUBLE_TYPE))
+
+    event = setParam(AREA_LABEL, _value, VAR_DOUBLE_TYPE)
+
+    addCommand(widgets, text=ENSURE_LABEL, event=event)
     return _value
 
 
 def RegisterOperator(root):
     _value = DoubleVar()
     widgets = addWidgets(root, OPERATOR_LABEL, _value)
-    addCommand(widgets, text=ENSURE_LABEL, event=setParam(
-        OPERATOR_LABEL, _value, VAR_STR_TYPE))
+
+    event = setParam(OPERATOR_LABEL, _value, VAR_STR_TYPE)
+
+    addCommand(widgets, text=ENSURE_LABEL, event=event)
     return _value
 
 
 def RegisterAtmospheric(root):
     _value = DoubleVar(value=store[ATMOSPHERIC_LABEL])
     widgts = addWidgets(root, ATMOSPHERIC_LABEL, _value)
-    addCommand(widgts, text=ENSURE_LABEL, event=setParam(
-        ATMOSPHERIC_LABEL, _value, DoubleVar))
+
+    event = setParam(ATMOSPHERIC_LABEL, _value, DoubleVar)
+
+    addCommand(widgts, text=ENSURE_LABEL, event=event)
     return _value

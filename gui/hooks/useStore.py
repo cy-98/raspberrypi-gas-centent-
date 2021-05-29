@@ -1,11 +1,18 @@
 from gui.const import *
 from random import randint
+import time
+
+
+def getDate():
+    return time.strftime('%Y-%m-%d', time.localtime())
+
 
 # global data store
 # every module can use useStore to get (store. setStore)
 store = {
     'xdata': [],
     'ydata': [],
+    'date':  getDate(),
     CELSIUS_LABEL: 25.0,
     VOLUME_LABEL: 0.0,
     DENSITY_LABEL: DEFAULT_DENSITY,

@@ -1,4 +1,4 @@
-from random import expovariate, setstate
+from random import expovariate, randint, setstate
 from tkinter.constants import FALSE, TRUE
 from types import resolve_bases
 from err import ErrorNetwork
@@ -6,14 +6,17 @@ from gui.calculate import calculate
 from gui.hooks.useStore import useStore
 from gui.hooks.useRender import useRender
 from gui.const import *
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 import requests as r
 import json
+import random
 
 
 baseUrl = 'http://localhost:3000'
 pressureRoute = '/pressure'
 ratioRoute = '/ratio'
 clearRoute = '/clear'
+uploadRoute = '/upload'
 
 
 save = None
@@ -73,23 +76,47 @@ def startFetch(type, callback):
         # 计算数据
         result = calculate()
         setStore(MEASURE_RESULT, result)
-        callback(str(result))
+        callback('计算结果： {}'.format(str(result)))
     return start
 # endregion
 
 
 def save():
+    store.pop('xdata')
+    store.pop('ydata')
+
+    file = open('data', 'w+', encoding='utf-8')
+
+    writeString = json.dumps(store, ensure_ascii=False, separators=(',', ':'))
+    file.write(writeString)
+    file.close()
+
     setStore('xdata', [])
     setStore('ydata', [])
 
-    file = open('data', 'a+', encoding='utf-8')
 
-    writeString = json.dumps(store, ensure_ascii=False,
-                             indent=4, separators=(',', ':'))
-    file.write(writeString + ',')
+def clearUI(cb):
+    def _clear():
+        setStore('xdata', [])
+        setStore('ydata', [])
+        useRender()
+        cb(WAITING)
+    return _clear
 
 
-def clearUI():
-    setStore('xdata', [])
-    setStore('ydata', [])
-    useRender()
+def upload():
+    filename = store['date'] + '+' + str(random.randint(1, 1000))
+    headers = {}
+    encoder = MultipartEncoder(
+        fields={
+            'file': (filename, open('data', 'rb'), 'text')
+        },
+        boundary='---------------------' + str(random.randint(1e28, 1e29 - 1))
+    )
+    headers['Content-Type'] = encoder.content_type
+    response = r.post(baseUrl + uploadRoute, data=encoder, headers=headers)
+
+    if response.status_code is not 200:
+        ErrorNetwork(baseUrl)
+    else:
+        print('uploaded')

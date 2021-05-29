@@ -8,7 +8,7 @@ from gui.sidebar import LoadSidebar
 from gui.navigator import LoadNavigator
 from gui.canvas import LoadCanvas
 from gui.command import addCommand
-from gui.event import clearUI, startFetch, save
+from gui.event import clearUI, startFetch, save, upload
 from gui.const import FETCH_P, FETCH_V
 
 
@@ -31,14 +31,14 @@ def main():
     navigator = LoadNavigator(window, size)
     canvas, charts = LoadCanvas(window, size)
 
-    status = StringVar(value=WAITING)
+    status = StringVar(value=WAITING)  # 程序状态 1. 未开始 2. 计算中 3. 结果
     updateStatus = bindStatus(status)
 
     addLabel(navigator, status)
     addCommand(sidebar, COMPUTE_LABEL_P, startFetch(FETCH_P, updateStatus))
     addCommand(sidebar, COMPUTE_LABEL_V, startFetch(FETCH_V, updateStatus))
-    addCommand(sidebar, CLEAR_LABEL, clearUI)
+    addCommand(sidebar, CLEAR_LABEL, clearUI(updateStatus))
     addCommand(sidebar, SAVE_LABEL, save)
-    addCommand(sidebar, UPLOAD_LABEL, None)
+    addCommand(sidebar, UPLOAD_LABEL, upload)
 
     window.mainloop()
